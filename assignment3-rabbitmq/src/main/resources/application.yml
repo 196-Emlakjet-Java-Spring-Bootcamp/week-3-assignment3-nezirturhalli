@@ -1,0 +1,47 @@
+#default settings
+server:
+  port: 2200
+  error:
+    include-message: always
+  servlet:
+    context-path: /rabbitmq
+#rabbitmq config properties
+spring:
+  rabbitmq:
+    template:
+      routing-key: saleAdvertisement-routing
+      exchange: saleAdvertisement-exchange
+    host: localhost
+    username: guest
+    password: guest
+    port: 5672
+  application:
+    name: rabbitmq-example
+#database config properties
+  datasource:
+    username: user
+    password: root
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/db
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    generate-ddl: true
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        ddl-auto: update
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
+# swagger-ui custom path
+# http://localhost:2200/rabbitmq/swagger-ui/index.html
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+
+# rabbitmq sample values
+sample:
+  rabbitmq:
+    queue: saleAdvertisement-queue

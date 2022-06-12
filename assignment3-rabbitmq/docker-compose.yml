@@ -1,0 +1,51 @@
+version: '3.8'
+services:
+  mysql:
+    container_name: db
+    image: mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: db
+    ports:
+      - "3306:3306"
+    networks:
+      - mysql
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: dev_phpma
+    restart: unless-stopped
+    environment:
+      PMA_HOST: db
+      PMA_USER: root
+      PMA_PASSWORD: root
+    ports:
+      - "8181:80"
+    networks:
+      - mysql
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    environment:
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+      RABBITMQ_DEFAULT_VHOST: "/"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+    networks:
+      - mysql
+networks:
+  mysql:
+    driver: bridge
+volumes:
+  mysql:
+  phpmyadmin:
+  rabbitmq:
+
