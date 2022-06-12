@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface SaleAdvertisementService {
 
-    String createSaleAdvertisement(SaleAdvertisementRequest saleAdvertisementRequest );
+    SaleAdvertisementResponse createSaleAdvertisement(SaleAdvertisementRequest saleAdvertisementRequest );
     List<SaleAdvertisementResponse> findAllSaleAdvertisements();
 }

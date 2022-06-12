@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class SaleAdvertisementResponse {
-    private UserResponse userResponse ;
     private String title;
     private String photo;
     private String detailMessage;

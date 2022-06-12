@@ -15,9 +15,9 @@ public class SaleAdvertisementConsumerServiceImpl {
     @RabbitListener(queues = {"${sample.rabbitmq.queue}"})
     public void listenProducer(@Payload SaleAdvertisement saleAdvertisement) throws
             InterruptedException {
-        Thread.sleep(2L * 1000);
-        saleAdvertisement.setPriceGraphPath("updated");
-        saleAdvertisementRepository.saveAndFlush(saleAdvertisement);
+        Thread.sleep(3L * 1000);
+        saleAdvertisement.setPriceGraphPath("Created by Worker");
+        saleAdvertisementRepository.save(saleAdvertisement);
 
     }
 
